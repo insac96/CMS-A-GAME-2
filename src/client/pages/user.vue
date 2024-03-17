@@ -20,10 +20,6 @@
       <DataPaymentHistory />
     </UiContent>
 
-    <UiContent title="Withdraw" sub="Lịch sử đổi xu" class="mb-6">
-      <DataWithdrawHistory />
-    </UiContent>
-
     <UiContent title="Shop" sub="Lịch sử mua hàng" class="mb-6">
       <DataShopHistory />
     </UiContent>

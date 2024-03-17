@@ -39,8 +39,8 @@ export const DBEventConfig = (mongoose : Mongoose) => {
     const event7 = await model.count({ type: 'spend.month.coin' })
     if(!event7) await model.create({ type: 'spend.month.coin', name: 'Tiêu phí tháng' })
 
-    const event8 = await model.count({ type: 'referral.count' })
-    if(!event8) await model.create({ type: 'referral.count', name: 'Giới thiệu bạn' })
+    const event8 = await model.count({ type: 'musty' })
+    if(!event8) await model.create({ type: 'musty', name: 'Nạp đơn' })
   }
 
   autoCreate()

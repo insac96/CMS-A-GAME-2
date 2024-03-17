@@ -45,10 +45,6 @@
           {{ toMoney(row.wheel || 0) }}
         </template>
 
-        <template #diamond-data="{ row }">
-          {{ toMoney(row.diamond || 0) }}
-        </template>
-
         <template #login-data="{ row }">
           {{ `${row.login || 0} ngày` }}
         </template>
@@ -117,10 +113,6 @@ const columns = [
   },{
     key: 'wheel',
     label: 'Lượt quay',
-    sortable: true
-  },{
-    key: 'diamond',
-    label: 'Cống hiến',
     sortable: true
   },{
     key: 'login',

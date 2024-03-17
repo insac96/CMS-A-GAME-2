@@ -6,7 +6,8 @@
 
     <MainEventLogin v-if="selected == 0" />
     <MainEventPay v-if="selected == 1" />
-    <MainEventSpend v-if="selected == 2" />
+    <MainEventMusty v-if="selected == 2" />
+    <MainEventSpend v-if="selected == 3" />
   </div>
 </template>
 
@@ -15,6 +16,8 @@ const items = [{
   label: 'Điểm Danh',
 }, {
   label: 'Tích Nạp',
+}, {
+  label: 'Nạp Đơn',
 }, {
   label: 'Tiêu Phí',
 }]

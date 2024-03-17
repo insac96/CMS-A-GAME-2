@@ -17,16 +17,12 @@ export const DBItem = (mongoose : Mongoose) => {
   const autoCreate = async () => {
     const coin = await model.count({type: 'coin'})
     const wheel = await model.count({type: 'wheel'})
-    const notify = await model.count({type: 'notify'})
     const wheel_lose = await model.count({type: 'wheel_lose'})
     if(coin == 0){
       await model.create({ item_id: 'coin', type: 'coin', item_name: 'Xu Web' })
     }
     if(wheel == 0){
       await model.create({ item_id: 'wheel', type: 'wheel', item_name: 'Lượt chơi vòng quay' })
-    }
-    if(notify == 0){
-      await model.create({ item_id: 'notify', type: 'notify', item_name: 'Lượt gửi thông báo' })
     }
     if(wheel_lose == 0){
       await model.create({ item_id: 'wheel_lose', type: 'wheel_lose', item_name: 'Mất lượt' })

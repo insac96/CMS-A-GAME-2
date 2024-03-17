@@ -30,23 +30,13 @@ export default defineEventHandler(async (event) => {
       || lastDate.month != nowDate.month 
       || lastDate.year != nowDate.year
     ){
-      user.limitedevent.luckymoney = 1
-      user.limitedevent.paymission = []
-      user.limitedevent.egg = {
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: []
-      } 
+      user.musty = []
       user.login.month = user.login.month + 1
       user.login.total = user.login.total + 1
       user.pay.day.money = 0
       user.pay.day.count = 0
       user.spend.day.coin = 0
       user.spend.day.count = 0
-      user.dice.day.coin = 0
-      user.dice.day.count = 0
       user.wheel.day = 0
     }
 
@@ -60,8 +50,6 @@ export default defineEventHandler(async (event) => {
       user.pay.month.count = 0
       user.spend.month.coin = 0
       user.spend.month.count = 0
-      user.dice.month.coin = 0
-      user.dice.month.count = 0
       user.wheel.month = 0
     }
 
@@ -88,12 +76,7 @@ export default defineEventHandler(async (event) => {
       username: user.username,
       level: realLevel.number,
       type: user.type,
-      referral_code: user.referral.code
     }
-
-    userStore.notify = await DB.NotifyUser.count({ 
-      to: { $elemMatch: { user: user._id, watched: 0 }} 
-    })
 
     return resp(event, { result: userStore })
   } 

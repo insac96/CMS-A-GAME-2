@@ -100,7 +100,7 @@
     <!--Modal Gift-->
     <UModal v-model="modal.gift" preventClose :ui="{width: 'sm:max-w-[700px]'}">
       <UForm :state="stateGift" @submit="giftAction" class="p-4">
-        <SelectItemList v-model="stateGift.gift" :types="['coin', 'wheel', 'notify', 'game_item']" />
+        <SelectItemList v-model="stateGift.gift" :types="['coin', 'wheel', 'game_item']" />
 
         <UiFlex justify="end" class="mt-4">
           <UButton type="submit" :loading="loading.gift">Lưu</UButton>

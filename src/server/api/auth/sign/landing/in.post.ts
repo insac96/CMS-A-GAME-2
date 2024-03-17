@@ -52,14 +52,6 @@ export default defineEventHandler(async (event) => {
       else deleteCookie(event, 'ads-from', runtimeConfig.public.cookieConfig)
     }
 
-    // Send Notify And Save Log
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã đăng nhập với IP <b>${IP}</b>`
-    })
-
     logUser(event, user._id, `Đăng nhập bằng Landing <b>${landingData.code}</b> với IP <b>${IP}</b>`)
     await createChat(event, 'bot', `<b>${user.username}</b> vừa truy cập`, true)
 

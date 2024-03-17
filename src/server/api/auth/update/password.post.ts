@@ -21,14 +21,7 @@ export default defineEventHandler(async (event) => {
 
     user.password = md5(password)
     await user.save()
-
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã thao tác đặt lại <b>mật khẩu</b> tài khoản`
-    })
-
+    
     const IP = getRequestIP(event, { xForwardedFor: true })
     logUser(event, user._id, `Thao tác đổi <b>mật khẩu</b> tài khoản bằng IP <b>${IP}</b>`)
 

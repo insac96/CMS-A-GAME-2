@@ -1,24 +1,9 @@
 <template>
-  <UiContent title="Login Event" sub="Quản lý mốc thưởng sự kiện đăng nhập">
+  <UiContent title="Payment Event" sub="Quản lý mốc thưởng sự kiện nạp tiền">
     <UiFlex class="mb-4">
       <USelectMenu v-model="page.size" :options="[5,10,20,50,100]" class="mr-1"/>
 
-      <USelectMenu 
-        v-model="page.type" 
-        value-attribute="value"
-        option-attribute="label"
-        :options="[
-          { label: 'Đăng nhập tháng', value: 'login.month' },
-          { label: 'Đăng nhập tổng', value: 'login.total' },
-        ]"
-        class="mr-auto"
-      >
-        <template #label>
-          <span>{{ typeFormat[page.type] }}</span>
-        </template>
-      </USelectMenu>  
-
-      <UButton color="gray" @click="modal.add = true">Thêm mốc</UButton>
+      <UButton class="ml-auto" color="gray" @click="modal.add = true">Thêm mốc</UButton>
     </UiFlex>
     
     <!-- Table -->
@@ -148,7 +133,7 @@ const page = ref({
     column: 'need',
     direction: 'asc'
   },
-  type: 'login.month',
+  type: 'musty',
   total: 0
 })
 watch(() => page.value.size, () => getList())
@@ -194,12 +179,6 @@ const loading = ref({
   gift: false,
   del: false
 })
-
-// Type
-const typeFormat = {
-  'login.month': 'Đăng nhập tháng',
-  'login.total': 'Đăng nhập tổng',
-}
 
 // Actions
 const actions = (row) => [

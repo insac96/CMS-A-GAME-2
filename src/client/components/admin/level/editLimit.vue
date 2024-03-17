@@ -50,25 +50,6 @@
         <UInput v-model="state.wheel.month" type="number" />
       </UFormGroup>
     </div>
-
-    <!-- Dice -->
-    <div v-if="tabItem == 3">
-      <UFormGroup label="Số xu chơi ngày">
-        <UInput v-model="state.dice.day.coin" type="number" />
-      </UFormGroup>
-
-      <UFormGroup label="Lần chơi ngày">
-        <UInput v-model="state.dice.day.count" type="number" />
-      </UFormGroup>
-
-      <UFormGroup label="Số xu chơi tháng">
-        <UInput v-model="state.dice.month.coin" type="number" />
-      </UFormGroup>
-
-      <UFormGroup label="Lần chơi tháng">
-        <UInput v-model="state.dice.month.count" type="number" />
-      </UFormGroup>
-    </div>
   </div>
 </template>
 
@@ -81,8 +62,7 @@ const tabItem = ref(0)
 const tabItems = [
   { label: 'Nạp tiền', key: 'pay' },
   { label: 'Tiêu phí', key: 'spend' },
-  { label: 'Vòng quay', key: 'wheel' },
-  { label: 'Xúc xắc', key: 'dice' },
+  { label: 'Vòng quay', key: 'wheel' }
 ]
 
 const stateChange = computed(() => JSON.stringify(state.value))

@@ -12,7 +12,8 @@ export default defineAppConfig({
     },
 
     card: {
-      base: 'relative overflow-x-hidden overflow-visible'
+      base: 'relative overflow-x-hidden overflow-visible',
+      rounded: 'rounded-2xl',
     },
 
     input: {

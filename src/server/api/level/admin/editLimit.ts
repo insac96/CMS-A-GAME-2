@@ -8,9 +8,9 @@ export default defineEventHandler(async (event) => {
     const { _id, limit } = await readBody(event)
     if(!_id || !limit) throw 'Dữ liệu đầu vào không hợp lệ'
 
-    const { pay, spend, wheel, dice } = limit
-    if(!pay || !spend || !wheel || !dice) throw 'Dữ liệu đầu vào không hợp lệ'
-    if(!pay.day || !pay.month || !spend.day || !spend.month || !dice.day || !dice.month) throw 'Dữ liệu đầu vào không hợp lệ'
+    const { pay, spend, wheel } = limit
+    if(!pay || !spend || !wheel ) throw 'Dữ liệu đầu vào không hợp lệ'
+    if(!pay.day || !pay.month || !spend.day || !spend.month) throw 'Dữ liệu đầu vào không hợp lệ'
     if(
       !!isNaN(parseInt(pay.day.money)) 
       || !!isNaN(parseInt(pay.day.count))
@@ -41,18 +41,7 @@ export default defineEventHandler(async (event) => {
       || parseInt(wheel.day) < 0
       || parseInt(wheel.month) < 0
     ) throw 'Dữ liệu đầu vào không hợp lệ'
-    if(
-      !!isNaN(parseInt(dice.day.coin)) 
-      || !!isNaN(parseInt(dice.day.count))
-      || parseInt(dice.day.coin) < 0
-      || parseInt(dice.day.count) < 0
-    ) throw 'Dữ liệu đầu vào không hợp lệ'
-    if(
-      !!isNaN(parseInt(dice.month.coin)) 
-      || !!isNaN(parseInt(dice.month.count))
-      || parseInt(dice.month.coin) < 0
-      || parseInt(dice.month.count) < 0
-    ) throw 'Dữ liệu đầu vào không hợp lệ'
+
 
     const level = await DB.Level.findOne({ _id: _id }).select('_id number')
     if(!level) throw 'Cấp độ không tồn tại'

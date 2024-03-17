@@ -11,7 +11,6 @@ export const DBUser = (mongoose : Mongoose) => {
     avatar: { type: String, default: '/images/user/default.png' },
     level: { type: mongoose.Schema.Types.ObjectId, ref: 'levels' },
     reg: {
-      teaser: { type: mongoose.Schema.Types.ObjectId, ref: 'ads_teaser' },
       landing: { type: mongoose.Schema.Types.ObjectId, ref: 'ads_landing' },
       from: { type: mongoose.Schema.Types.ObjectId, ref: 'ads_from' },
       platform: { type: String, default: 'local' },
@@ -22,56 +21,11 @@ export const DBUser = (mongoose : Mongoose) => {
       google: { type: String },
       tiktok: { type: String },
     },
-    referral: {
-      code: { type: String },
-      person: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
-      count: { type: Number, default: 0, index: true },
-      receive_gift: { type: Number, default: 0, index: true },
-    },
     currency: {
       coin: { type: Number, default: 0, index: true },
-      wheel: { type: Number, default: 0, index: true },
-      notify: { type: Number, default: 0, index: true },
-      diamond: { type: Number, default: 0, index: true },
+      wheel: { type: Number, default: 0, index: true }
     },
-    limitedevent: {
-      luckymoney: { type: Number, default: 1, index: true },
-      payment: {
-        day: { type: Number, default: 0, index: true },
-        receive: { type: Number, default: 0, index: true },
-      },
-      paymission: [{
-        money: { type: Number, default: 0, index: true },
-        receive: { type: Boolean, default: false },
-      }],
-      egg: {
-        1: [{
-          item: { type: mongoose.Schema.Types.ObjectId, ref: 'items', index: true },
-          amount: { type: Number, index: true },
-          index: { type: Number, index: true },
-        }], 
-        2: [{
-          item: { type: mongoose.Schema.Types.ObjectId, ref: 'items', index: true },
-          amount: { type: Number, index: true },
-          index: { type: Number, index: true },
-        }], 
-        3: [{
-          item: { type: mongoose.Schema.Types.ObjectId, ref: 'items', index: true },
-          amount: { type: Number, index: true },
-          index: { type: Number, index: true },
-        }], 
-        4: [{
-          item: { type: mongoose.Schema.Types.ObjectId, ref: 'items', index: true },
-          amount: { type: Number, index: true },
-          index: { type: Number, index: true },
-        }], 
-        5: [{
-          item: { type: mongoose.Schema.Types.ObjectId, ref: 'items', index: true },
-          amount: { type: Number, index: true },
-          index: { type: Number, index: true },
-        }], 
-      }
-    },
+    musty: [{ type: Number, default: 0, index: true }],
     pay: {
       total: {
         money: { type: Number, default: 0, index: true },
@@ -104,20 +58,6 @@ export const DBUser = (mongoose : Mongoose) => {
       total: { type: Number, default: 0, index: true },
       day: { type: Number, default: 0, index: true },
       month: { type: Number, default: 0, index: true },
-    },
-    dice: {
-      total: {
-        coin: { type: Number, default: 0, index: true },
-        count: { type: Number, default: 0, index: true },
-      },
-      day: {
-        coin: { type: Number, default: 0, index: true },
-        count: { type: Number, default: 0, index: true },
-      },
-      month: {
-        coin: { type: Number, default: 0, index: true },
-        count: { type: Number, default: 0, index: true },
-      }
     },
     login: {
       month: { type: Number, default: 1, index: true },

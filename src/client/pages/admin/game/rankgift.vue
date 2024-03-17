@@ -69,7 +69,7 @@
         </UFormGroup>
 
         <UFormGroup name="gift">
-          <SelectItemList v-model="stateAdd.gift" :types="['coin', 'wheel', 'notify', 'game_item']" />
+          <SelectItemList v-model="stateAdd.gift" :types="['coin', 'wheel', 'game_item']" />
         </UFormGroup>
 
         <UiFlex justify="end" class="mt-6">
@@ -87,7 +87,7 @@
         </UFormGroup>
 
         <UFormGroup name="gift">
-          <SelectItemList v-model="stateEdit.gift" :types="['coin', 'wheel', 'notify', 'game_item']" />
+          <SelectItemList v-model="stateEdit.gift" :types="['coin', 'wheel', 'game_item']" />
         </UFormGroup>
 
         <UiFlex justify="end" class="mt-6">

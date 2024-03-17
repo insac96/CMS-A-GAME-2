@@ -45,14 +45,8 @@ export default defineEventHandler(async (event) => {
     const logIP = await DB.LogUserIP.findOne({ user: user._id, ip: IP })
     if(!logIP) await DB.LogUserIP.create({ user: user._id, ip: IP })
 
-    // Send Notify and Save Log
+    // Save Log
     logUser(event, user._id, `Đăng nhập với IP <b>${IP}</b>`)
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã đăng nhập với IP <b>${IP}</b>`
-    })
     await createChat(event, 'bot', `<b>${user.username}</b> vừa truy cập`, true)
 
     return resp(event, { message: 'Đăng nhập thành công' })

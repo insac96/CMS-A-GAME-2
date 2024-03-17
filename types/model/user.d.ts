@@ -13,7 +13,6 @@ export interface IDBUser {
   avatar: string
   level: Types.ObjectId | IDBLevel
   reg: {
-    teaser: Types.ObjectId
     landing: Types.ObjectId
     from: Types.ObjectId
     platform: string
@@ -24,56 +23,11 @@ export interface IDBUser {
     google: string
     tiktok: string
   }
-  referral: {
-    code: string
-    person: Types.ObjectId
-    count: number
-    receive_gift: number
-  }
   currency: {
     coin: number
     wheel: number
-    notify: number
-    diamond: number
   }
-  limitedevent: {
-    luckymoney: number
-    payment: {
-      day: number
-      receive: number
-    }
-    paymission: Array<{
-      money: number
-      receive: boolean
-    }>
-    egg: {
-      1: Array<{
-        item: Types.ObjectId | IDBItem,
-        amount: number
-        index: number
-      }>
-      2: Array<{
-        item: Types.ObjectId | IDBItem,
-        amount: number
-        index: number
-      }>
-      3: Array<{
-        item: Types.ObjectId | IDBItem,
-        amount: number
-        index: number
-      }>
-      4: Array<{
-        item: Types.ObjectId | IDBItem,
-        amount: number
-        index: number
-      }>
-      5: Array<{
-        item: Types.ObjectId | IDBItem,
-        amount: number
-        index: number
-      }>
-    }
-  }
+  musty: Array<number>
   pay: {
     total: {
       money: number
@@ -107,20 +61,6 @@ export interface IDBUser {
     day: number
     month: number
   }
-  dice: {
-    total: {
-      coin: number
-      count: number
-    },
-    day: {
-      coin: number
-      count: number
-    },
-    month: {
-      coin: number
-      count: number
-    }
-  }
   login: {
     month: number
     total: number
@@ -148,6 +88,4 @@ export interface IDBUserStore {
   username? : string
   level? : number
   type?: number
-  referral_code?: string
-  notify?: number
 }

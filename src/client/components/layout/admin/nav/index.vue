@@ -38,8 +38,8 @@
       <template #tab-7><UVerticalNavigation :links="navItems[7].children" @click="emit('to')"/></template>
       <template #tab-8><UVerticalNavigation :links="navItems[8].children" @click="emit('to')"/></template>
       <template #tab-9><UVerticalNavigation :links="navItems[9].children" @click="emit('to')"/></template>
-      <!-- <template #tab-10><UVerticalNavigation :links="navItems[10].children" @click="emit('to')"/></template>
-      <template #tab-11><UVerticalNavigation :links="navItems[11].children" @click="emit('to')"/></template>
+      <template #tab-10><UVerticalNavigation :links="navItems[10].children" @click="emit('to')"/></template>
+      <!-- <template #tab-11><UVerticalNavigation :links="navItems[11].children" @click="emit('to')"/></template>
       <template #tab-12><UVerticalNavigation :links="navItems[12].children" @click="emit('to')"/></template>
       <template #tab-13><UVerticalNavigation :links="navItems[13].children" @click="emit('to')"/></template> -->
     </UAccordion>
@@ -66,7 +66,6 @@ const navItems = [
     defaultOpen: false,
     slot: 'tab-1',
     children: [
-      // { label: 'Teaser', to: '/admin/ads/teaser' },
       { label: 'Landing', to: '/admin/ads/landing' },
       { label: 'From', to: '/admin/ads/from' }
     ]
@@ -81,16 +80,6 @@ const navItems = [
       { label: 'Kênh chat', to: '/admin/socket/chat' },
     ]
   },
-  // {
-  //   label: 'Tin tức',
-  //   icon: 'i-bx-news',
-  //   defaultOpen: false,
-  //   slot: 'tab-3',
-  //   children: [
-  //   { label: 'Danh mục', to: '/admin/news/category' }, 
-  //   { label: 'Danh sách', to: '/admin/news' }, 
-  //   ]
-  // },
   {
     label: 'Tài khoản',
     icon: 'i-bx-user',
@@ -113,15 +102,6 @@ const navItems = [
       { label: 'Danh sách', to: '/admin/payment' }, 
     ]
   },
-  // {
-  //   label: 'Đổi xu',
-  //   icon: 'i-bx-money-withdraw',
-  //   defaultOpen: false,
-  //   slot: 'tab-6',
-  //   children: [
-  //     { label: 'Danh sách', to: '/admin/withdraw' }, 
-  //   ]
-  // },
   {
     label: 'Trò chơi',
     icon: 'i-bx-cube-alt',
@@ -153,7 +133,7 @@ const navItems = [
     slot: 'tab-7',
     children: [
       { label: 'Cài đặt', to: '/admin/shop/config' },
-      //{ label: 'Gói', to: '/admin/shop/pack' },
+      { label: 'Gói', to: '/admin/shop/pack' },
       { label: 'Vật phẩm', to: '/admin/shop/item' },
       //{ label: 'Tiền tệ', to: '/admin/shop/currency' }, 
       { label: 'Lịch sử', to: '/admin/shop/history' }, 
@@ -165,41 +145,28 @@ const navItems = [
     defaultOpen: false,
     slot: 'tab-8',
     children: [
-      { label: 'Cặt đặt', to: '/admin/event/config' }, 
+      //{ label: 'Cặt đặt', to: '/admin/event/config' }, 
       { label: 'Đăng nhập', to: '/admin/event/login' }, 
       { label: 'Tích nạp', to: '/admin/event/pay' }, 
+      { label: 'Nạp đơn', to: '/admin/event/musty' }, 
       { label: 'Tiêu phí', to: '/admin/event/spend' },
-      //{ label: 'Giới thiệu', to: '/admin/event/referral' },
       { label: 'Lịch sử', to: '/admin/event/history' },
     ]
   },
-  // {
-  //   label: 'Mini Game',
-  //   icon: 'i-bx-game',
-  //   defaultOpen: false,
-  //   slot: 'tab-11',
-  //   children: [
-  //     { label: 'Vòng quay', to: '/admin/minigame/wheel' }, 
-  //     { label: 'Xúc xắc', to: '/admin/minigame/dice' }
-  //   ]
-  // },
-  // {
-  //   label: 'Sự kiện hạn thời',
-  //   icon: 'i-bxs-party',
-  //   defaultOpen: false,
-  //   slot: 'tab-12',
-  //   children: [
-  //     { label: 'Rút may mắn', to: '/admin/limitedevent/luckymoney' }, 
-  //     { label: 'Liên nạp', to: '/admin/limitedevent/payment' }, 
-  //     { label: 'Nạp đúng mốc', to: '/admin/limitedevent/paymission' },
-  //     { label: 'Đập trứng', to: '/admin/limitedevent/egg' }, 
-  //   ]
-  // },
+  {
+    label: 'Mini Game',
+    icon: 'i-bx-game',
+    defaultOpen: false,
+    slot: 'tab-9',
+    children: [
+      { label: 'Vòng quay', to: '/admin/minigame/wheel' }, 
+    ]
+  },
   {
     label: 'Nhật ký',
     icon: 'i-bx-book',
     defaultOpen: false,
-    slot: 'tab-9',
+    slot: 'tab-10',
     children: [
       { label: 'Quản trị viên', to: '/admin/log/admin' }, 
       { label: 'Gửi vật phẩm', to: '/admin/log/adminSendItem' },

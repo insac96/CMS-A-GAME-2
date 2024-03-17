@@ -21,10 +21,6 @@
         <UInput icon="i-bx-lock" v-model="state.password" type="password" placeholder="Nhập mật khẩu" />
       </UFormGroup>
 
-      <!-- <UFormGroup label="Mã mời" name="referral_code" v-if="!!configStore.config.enable.referral">
-        <UInput icon="i-bx-barcode" v-model="state.referral_code" placeholder="Nhập mã mời nếu có" />
-      </UFormGroup> -->
-
       <UiFlex justify="between">
         <UiText size="xs" color="gray" class="cursor-pointer" @click="emit('in')">Đã có tài khoản?</UiText>
         <UButton color="gray" type="submit" :loading="loading.signup">Đăng Ký</UButton>
@@ -51,7 +47,6 @@ const state = ref({
   email: undefined,
   phone: undefined,
   password: undefined,
-  referral_code: undefined
 })
 
 const validate = (state) => {

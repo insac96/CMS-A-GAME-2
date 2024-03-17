@@ -94,11 +94,6 @@
           <UInput v-model="stateEditCurrency.origin.wheel" type="number" v-if="stateEditCurrency.type == 'origin'"/>
         </UFormGroup>
 
-        <UFormGroup label="Lượt gửi thông báo">
-          <UInput v-model="stateEditCurrency.plus.notify" type="number" v-if="stateEditCurrency.type == 'plus'" />
-          <UInput v-model="stateEditCurrency.origin.notify" type="number" v-if="stateEditCurrency.type == 'origin'"/>
-        </UFormGroup>
-
         <UFormGroup label="Lý do">
           <UTextarea v-model="stateEditCurrency.reason" />
         </UFormGroup>
@@ -240,13 +235,11 @@ const stateEditCurrency = ref({
   type: null,
   plus: {
     coin: 0,
-    wheel: 0,
-    notify: 0
+    wheel: 0
   },
   origin: {
     coin: null,
-    wheel: null,
-    notify: null
+    wheel: null
   },
   reason: null
 })
@@ -272,13 +265,11 @@ watch(() => modal.value.editCurrency, (val) => !val && (stateEditCurrency.value 
   type: null,
   plus: {
     coin: 0,
-    wheel: 0,
-    notify: 0
+    wheel: 0
   },
   origin: {
     coin: null,
-    wheel: null,
-    notify: null
+    wheel: null
   },
   reason: null
 }))

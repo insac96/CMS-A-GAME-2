@@ -44,7 +44,6 @@ const navItems = [
     children: [
       { label: 'Tài khoản', to: `/preview/${route.params._secret}/user` }, 
       { label: 'Nạp tiền', to: `/preview/${route.params._secret}/payment` }, 
-      { label: 'Đổi xu', to: `/preview/${route.params._secret}/withdraw` }, 
     ]
   },
   {

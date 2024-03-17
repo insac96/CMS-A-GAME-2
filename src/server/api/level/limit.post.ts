@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
     if(!!auth){
       const authContext = await getAuth(event) as IAuth
-      authData = await DB.User.findOne({ _id: authContext._id }).select('pay spend dice wheel level')
+      authData = await DB.User.findOne({ _id: authContext._id }).select('pay spend wheel level')
       levelData = await DB.Level.findOne({ _id: authData.level }).select('number limit')
       delete authData['level']
     }

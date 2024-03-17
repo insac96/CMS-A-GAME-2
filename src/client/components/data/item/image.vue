@@ -33,7 +33,6 @@ const typeFormat = {
   'game_item': 'item',
   'coin': 'coin',
   'wheel': 'wheel',
-  'notify': 'notify',
 
   'empty-gift': 'empty-gift',
   'wheel_lose': 'wheel_lose'

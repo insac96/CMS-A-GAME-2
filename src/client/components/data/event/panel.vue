@@ -1,7 +1,7 @@
 <template>
   <UiFlex class="PannelMenu" @click="to">
     <UiFlex type="col" items="start" class="pl-5">
-      <UiText class="PannelMenu__Title mb-1" size="3xl">Web Event</UiText>
+      <UiText class="PannelMenu__Title mb-1" size="3xl">Event</UiText>
       <UiText size="xs">Sự Kiện</UiText>
     </UiFlex>
     <img class="PannelMenu__Icon" src="/ui/event.png" />

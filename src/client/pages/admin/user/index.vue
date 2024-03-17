@@ -47,10 +47,6 @@
           {{ toMoney(row.wheel || 0) }}
         </template>
 
-        <template #diamond-data="{ row }">
-          {{ toMoney(row.diamond || 0) }}
-        </template>
-
         <template #login-data="{ row }">
           {{ `${row.login || 0} ngày` }}
         </template>
@@ -135,11 +131,6 @@
           <UInput v-model="stateEditCurrency.origin.wheel" type="number" v-if="stateEditCurrency.type == 'origin'"/>
         </UFormGroup>
 
-        <UFormGroup label="Lượt gửi thông báo">
-          <UInput v-model="stateEditCurrency.plus.notify" type="number" v-if="stateEditCurrency.type == 'plus'" />
-          <UInput v-model="stateEditCurrency.origin.notify" type="number" v-if="stateEditCurrency.type == 'origin'"/>
-        </UFormGroup>
-
         <UFormGroup label="Lý do">
           <UTextarea v-model="stateEditCurrency.reason" />
         </UFormGroup>
@@ -205,50 +196,6 @@
       </UForm>
     </UModal>
 
-    <!-- Modal Edit Wheel-->
-    <!-- <UModal v-model="modal.editWheel" preventClose>
-      <UForm :state="stateEditWheel" @submit="editWheelAction" class="p-4" v-if="stateEditWheel.wheel">
-        <UFormGroup label="Ngày">
-          <UInput v-model="stateEditWheel.wheel.day" type="number" />
-        </UFormGroup>
-
-        <UFormGroup label="Tháng">
-          <UInput v-model="stateEditWheel.wheel.month" type="number" />
-        </UFormGroup>
-
-        <UFormGroup label="Tổng">
-          <UInput v-model="stateEditWheel.wheel.total" type="number" />
-        </UFormGroup>
-
-        <UiFlex justify="end" class="mt-6">
-          <UButton type="submit" :loading="loading.editWheel">Sửa dữ liệu vòng quay</UButton>
-          <UButton color="gray" @click="modal.editWheel = false" :disabled="loading.editWheel" class="ml-1">Đóng</UButton>
-        </UiFlex>
-      </UForm>
-    </UModal> -->
-
-    <!-- Modal Edit Dice-->
-    <!-- <UModal v-model="modal.editDice" preventClose>
-      <UForm :state="stateEditDice" @submit="editDiceAction" class="p-4" v-if="stateEditDice.dice">
-        <UFormGroup label="Ngày">
-          <UInput v-model="stateEditDice.dice.day.coin" type="number" />
-        </UFormGroup>
-
-        <UFormGroup label="Tháng">
-          <UInput v-model="stateEditDice.dice.month.coin" type="number" />
-        </UFormGroup>
-
-        <UFormGroup label="Tổng">
-          <UInput v-model="stateEditDice.dice.total.coin" type="number" />
-        </UFormGroup>
-
-        <UiFlex justify="end" class="mt-6">
-          <UButton type="submit" :loading="loading.editDice">Sửa dữ liệu xúc xắc</UButton>
-          <UButton color="gray" @click="modal.editDice = false" :disabled="loading.editDice" class="ml-1">Đóng</UButton>
-        </UiFlex>
-      </UForm>
-    </UModal> -->
-
     <!-- Modal Edit Login-->
     <UModal v-model="modal.editLogin" preventClose>
       <UForm :state="stateEditLogin" @submit="editLoginAction" class="p-4" v-if="stateEditLogin.login">
@@ -306,16 +253,8 @@ const columns = [
     label: 'Lượt quay',
     sortable: true
   },{
-    key: 'diamond',
-    label: 'Cống hiến',
-    sortable: true
-  },{
     key: 'login',
     label: 'Đăng nhập',
-    sortable: true
-  },{
-    key: 'referral',
-    label: 'Mời',
     sortable: true
   },{
     key: 'ip',
@@ -375,13 +314,11 @@ const stateEditCurrency = ref({
   type: null,
   plus: {
     coin: 0,
-    wheel: 0,
-    notify: 0
+    wheel: 0
   },
   origin: {
     coin: null,
-    wheel: null,
-    notify: null
+    wheel: null
   },
   reason: null
 })
@@ -408,11 +345,6 @@ const stateEditWheel = ref({
   wheel: null
 })
 
-const stateEditDice = ref({
-  _id: null,
-  dice: null
-})
-
 const stateSendItem = ref({
   user: null
 })
@@ -427,7 +359,6 @@ const modal = ref({
   editSpend: false,
   editLogin: false,
   editWheel: false,
-  editDice: false,
   sendItem: false
 })
 
@@ -435,13 +366,11 @@ watch(() => modal.value.editCurrency, (val) => !val && (stateEditCurrency.value 
   type: null,
   plus: {
     coin: 0,
-    wheel: 0,
-    notify: 0
+    wheel: 0
   },
   origin: {
     coin: null,
-    wheel: null,
-    notify: null
+    wheel: null
   },
   reason: null
 }))
@@ -458,7 +387,6 @@ const loading = ref({
   editSpend: false,
   editLogin: false,
   editWheel: false,
-  editDice: false,
   exportExcel: false
 })
 
@@ -526,23 +454,6 @@ const actions = (row) => [
       modal.value.sendItem = true
     }
   }],
-  // [{
-  //   label: 'Sửa d.liệu vòng quay',
-  //   icon: 'i-bx-color',
-  //   click: () => {
-  //     stateEditWheel.value.wheel = JSON.parse(JSON.stringify(row.wheel_data))
-  //     stateEditWheel.value._id = row._id
-  //     modal.value.editWheel = true
-  //   }
-  // },{
-  //   label: 'Sửa d.liệu xúc xắc',
-  //   icon: 'i-bx-dice-6',
-  //   click: () => {
-  //     stateEditDice.value.dice = JSON.parse(JSON.stringify(row.dice_data))
-  //     stateEditDice.value._id = row._id
-  //     modal.value.editDice = true
-  //   }
-  // }],
   [{
     label: 'Sửa đăng nhập',
     icon: 'i-bx-calendar',
@@ -624,34 +535,6 @@ const editSpendAction = async () => {
     loading.value.editSpend = false
   }
 }
-
-// const editWheelAction = async () => {
-//   try {
-//     loading.value.editWheel = true
-//     await useAPI('user/admin/editWheel', JSON.parse(JSON.stringify(stateEditWheel.value)))
-
-//     loading.value.editWheel = false
-//     modal.value.editWheel = false
-//     getList()
-//   }
-//   catch (e) {
-//     loading.value.editWheel = false
-//   }
-// }
-
-// const editDiceAction = async () => {
-//   try {
-//     loading.value.editDice = true
-//     await useAPI('user/admin/editDice', JSON.parse(JSON.stringify(stateEditDice.value)))
-
-//     loading.value.editDice = false
-//     modal.value.editDice = false
-//     getList()
-//   }
-//   catch (e) {
-//     loading.value.editDice = false
-//   }
-// }
 
 const editLoginAction = async () => {
   try {

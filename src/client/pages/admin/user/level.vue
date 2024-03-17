@@ -30,10 +30,6 @@
           {{ row.discount }}%
         </template>
 
-        <template #bonus_presentee_pay-data="{ row }">
-          {{ row.bonus_presentee_pay }}%
-        </template>
-
         <template #updatedAt-data="{ row }">
           {{ useDayJs().displayFull(row.updatedAt) }}
         </template>
@@ -71,10 +67,6 @@
           <UInput v-model="stateAdd.discount" type="number" />
         </UFormGroup>
 
-        <UFormGroup label="Bạn bè nạp thưởng cống hiến (%)">
-          <UInput v-model="stateAdd.bonus_presentee_pay" type="number" />
-        </UFormGroup>
-
         <UiFlex justify="end" class="mt-6">
           <UButton type="submit" :loading="loading.add">Thêm</UButton>
           <UButton color="gray" @click="modal.add = false" :disabled="loading.add" class="ml-1">Đóng</UButton>
@@ -99,10 +91,6 @@
 
         <UFormGroup label="Giảm giá cửa hàng (%)">
           <UInput v-model="stateEditInfo.discount" type="number" />
-        </UFormGroup>
-
-        <UFormGroup label="Bạn bè nạp thưởng cống hiến (%)">
-          <UInput v-model="stateEditInfo.bonus_presentee_pay" type="number" />
         </UFormGroup>
 
         <UiFlex justify="end" class="mt-6">
@@ -135,18 +123,6 @@
         </UiFlex>
       </UForm>
     </UModal>
-
-     <!-- Modal Edit Gift Invited -->
-     <UModal v-model="modal.editGiftInvited" preventClose>
-      <UForm :state="stateEditGiftInvited" @submit="editGiftInvitedAction" class="p-4">
-        <SelectItemList v-model="stateEditGiftInvited.gift_invited" :types="['coin', 'wheel', 'notify', 'game_item']" />
-
-        <UiFlex justify="end" class="mt-6">
-          <UButton type="submit" :loading="loading.editGiftInvited">Sửa</UButton>
-          <UButton color="gray" @click="modal.editGiftInvited = false" :disabled="loading.editGiftInvited" class="ml-1">Đóng</UButton>
-        </UiFlex>
-      </UForm>
-    </UModal>
   </UiContent>
 </template>
 
@@ -171,10 +147,6 @@ const columns = [
   },{
     key: 'discount',
     label: 'Giảm giá cửa hàng',
-    sortable: true
-  },{
-    key: 'bonus_presentee_pay',
-    label: 'Bạn bè nạp thưởng CH',
     sortable: true
   },{
     key: 'updatedAt',
@@ -206,7 +178,6 @@ const stateAdd = ref({
   number: null,
   bonus: 0,
   bonus_wheel: 0,
-  bonus_presentee_pay: 0,
   discount: 0,
 })
 
@@ -215,7 +186,6 @@ const stateEditInfo = ref({
   number: null,
   bonus: null,
   bonus_wheel: null,
-  bonus_presentee_pay: null,
   discount: null
 })
 
@@ -229,25 +199,18 @@ const stateEditLimit = ref({
   limit: null
 })
 
-const stateEditGiftInvited = ref({
-  _id: null,
-  gift_invited: null
-})
-
 // Modal
 const modal = ref({
   add: false,
   editInfo: false,
   editNeed: false,
-  editLimit: false,
-  editGiftInvited: false
+  editLimit: false
 })
 
 watch(() => modal.value.add, (val) => !val && (stateAdd.value = {
   number: null,
   bonus: 0,
   bonus_wheel: 0,
-  bonus_presentee_pay: 0,
   discount: 0,
 }))
 
@@ -258,8 +221,7 @@ const loading = ref({
   editInfo: false,
   editNeed: false,
   editLimit: false,
-  del: false,
-  editGiftInvited: false
+  del: false
 })
 
 // Actions
@@ -285,14 +247,6 @@ const actions = (row) => [
     click: () => {
       Object.keys(stateEditLimit.value).forEach(key => stateEditLimit.value[key] = row[key])
       modal.value.editLimit = true
-    }
-  }],[{
-    label: 'Sửa quà cho bạn bè',
-    icon: 'i-bx-gift',
-    click: () => {
-      stateEditGiftInvited.value._id = row._id
-      stateEditGiftInvited.value.gift_invited = JSON.parse((JSON.stringify(row.gift_invited)))
-      modal.value.editGiftInvited = true
     }
   }],[{
     label: 'Xóa cấp độ',
@@ -370,20 +324,6 @@ const editLimitAction = async () => {
   }
   catch (e) {
     loading.value.editLimit = false
-  }
-}
-
-const editGiftInvitedAction = async () => {
-  try {
-    loading.value.editGiftInvited = true
-    await useAPI('level/admin/editGiftInvited', JSON.parse(JSON.stringify(stateEditGiftInvited.value)))
-
-    loading.value.editGiftInvited = false
-    modal.value.editGiftInvited = false
-    getList()
-  }
-  catch (e) {
-    loading.value.editGiftInvited = false
   }
 }
 

@@ -20,11 +20,9 @@
 
     <UTable :columns="columns" :rows="data">
       <template #login-data="{ row }">{{ row.login == -1 ? '...' : `${row.login} ngày` }} </template>
-      <template #referral-data="{ row }">{{ row.referral == -1 ? '...' : `${row.referral} người` }} </template>
       <template #pay-data="{ row }">{{ toMoney(row.pay) }} {{ typeShow == 'number' ? 'đ' : 'lần' }}</template>
       <template #spend-data="{ row }">{{ toMoney(row.spend) }} {{ typeShow == 'number' ? 'xu' : 'lần' }}</template>
       <template #wheel-data="{ row }">{{ toMoney(row.wheel) }} lần</template>
-      <template #dice-data="{ row }">{{ toMoney(row.dice) }} {{ typeShow == 'number' ? 'xu' : 'lần' }}</template>
     </UTable>
   </UCard>
 </template>
@@ -42,14 +40,12 @@ const columns = computed(() => {
   let data = [
     { key: 'pay', label: 'Nạp tiền' },
     { key: 'spend', label: 'Tiêu phí' },
-    { key: 'dice', label: 'Xúc xắc' },
   ]
 
   if(typeShow.value == 'count') {
     data.push({ key: 'wheel', label: 'Vòng quay' })
     data = [
       { key: 'login', label: 'Đăng nhập' },
-      { key: 'referral', label: 'Giới thiệu' },
     ].concat(data)
   }
 
@@ -68,26 +64,20 @@ const data =  computed(() => {
     time: 'Ngày',
     pay: data.pay?.day[`${typeMoney}`],
     spend: data.spend?.day[`${typeCoin}`],
-    dice: data.dice?.day[`${typeCoin}`],
     wheel: data.wheel?.day,
     login: -1,
-    referral: -1
   },{ 
     time: 'Tháng',
     pay: data.pay?.month[`${typeMoney}`],
     spend: data.spend?.month[`${typeCoin}`],
-    dice: data.dice?.month[`${typeCoin}`],
     wheel: data.wheel?.month,
     login: data.login?.month,
-    referral: -1
   },{ 
     time: 'Tổng',
     pay: data.pay?.total[`${typeMoney}`],
     spend: data.spend?.total[`${typeCoin}`],
-    dice: data.dice?.total[`${typeCoin}`],
     wheel: data.wheel?.total,
-    login: data.login?.total,
-    referral: data.referral?.count
+    login: data.login?.total
   }]
 })
 

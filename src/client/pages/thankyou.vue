@@ -28,11 +28,6 @@ const start = async () => {
   try {
     await useAPI('game/start')
 
-    if(!!route.query.type && route.query.type == 'teaser') {  
-      if(!!configStore.config.social.zalo) window.open(configStore.config.social.zalo, '_blank')
-      return useTo().navigateToSSL('/')
-    }
-
     if(!!runtimeConfig.public.dev) navigateTo('/play')
     else location.href = `http://game.${runtimeConfig.public.domain}/play`
   }

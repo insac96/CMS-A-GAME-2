@@ -17,14 +17,12 @@ export default defineEventHandler(async (event) => {
       if(
         !!isNaN(parseInt(plus.coin)) 
         || !!isNaN(parseInt(plus.wheel))
-        || !!isNaN(parseInt(plus.notify))
       ) throw 'Dữ liệu tiền tệ không hợp lệ'
 
       const update : any = {}
       update['$inc'] = {
         'currency.coin': parseInt(plus.coin), 
-        'currency.wheel': parseInt(plus.wheel),
-        'currency.notify': parseInt(plus.notify)
+        'currency.wheel': parseInt(plus.wheel)
       }
 
       const change = []
@@ -34,15 +32,11 @@ export default defineEventHandler(async (event) => {
       if(parseInt(plus.wheel) > 0){
         change.push(`${plus.wheel.toLocaleString('vi-VN')} lượt quay`)
       }
-      if(parseInt(plus.notify) > 0){
-        change.push(`${plus.notify.toLocaleString('vi-VN')} lượt gửi thông báo`)
-      }
 
       if(change.length > 0){
         const userUpdate = await DB.User.findOneAndUpdate({ _id: _id }, update, { new: true }).select('currency')
         if(userUpdate.currency.coin < 0) userUpdate.currency.coin = 0
         if(userUpdate.currency.wheel < 0) userUpdate.currency.wheel = 0
-        if(userUpdate.currency.notify < 0) userUpdate.currency.notify = 0
         await userUpdate.save()
 
         logUser(event, user._id, `Nhận <b>${change.join(', ')}</b> từ quản trị viên <b>${auth.username}</b> với lý do <b>${reason}</b>`)
@@ -54,10 +48,8 @@ export default defineEventHandler(async (event) => {
       if(
         !!isNaN(parseInt(origin.coin)) 
         || !!isNaN(parseInt(origin.wheel))
-        || !!isNaN(parseInt(origin.notify))
         || parseInt(origin.coin) < 0
         || parseInt(origin.wheel) < 0
-        || parseInt(origin.notify) < 0
       ) throw 'Dữ liệu tiền tệ không hợp lệ'
 
       const update : any = {}
@@ -73,16 +65,11 @@ export default defineEventHandler(async (event) => {
         change.push('lượt quay')
         logUser(event, user._id, `Số <b>lượt quay</b> được thay đổi từ <b>${user.currency.wheel.toLocaleString('vi-VN')}</b> thành <b>${origin.wheel.toLocaleString('vi-VN')}</b> bởi quản trị viên <b>${auth.username}</b> với lý do <b>${reason}</b>`)
       }
-      if(origin.notify != user.currency.notify){
-        change.push('lượt gửi thông báo')
-        logUser(event, user._id, `Số <b>lượt gửi thông báo</b> được thay đổi từ <b>${user.currency.notify.toLocaleString('vi-VN')}</b> thành <b>${origin.notify.toLocaleString('vi-VN')}</b> bởi quản trị viên <b>${auth.username}</b> với lý do <b>${reason}</b>`)
-      }
 
       if(change.length > 0){
         const userUpdate = await DB.User.findOneAndUpdate({ _id: _id }, update, { new: true }).select('currency')
         if(userUpdate.currency.coin < 0) userUpdate.currency.coin = 0
         if(userUpdate.currency.wheel < 0) userUpdate.currency.wheel = 0
-        if(userUpdate.currency.notify < 0) userUpdate.currency.notify = 0
         await userUpdate.save()
 
         logAdmin(event, `Sửa dữ liệu <b>${change.join(', ')}</b> của tài khoản <b>${user.username}</b> với lý do <b>${reason}</b>`)

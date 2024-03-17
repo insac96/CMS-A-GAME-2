@@ -42,15 +42,13 @@ export default defineEventHandler(async (event) => {
     if(logIP > 30) throw 'IP đã vượt quá giới hạn tạo tài khoản'
 
     // Create
-    const referral : any = { code: `${config.contact.prefix || 'GAME'}-${username.toUpperCase()}` }
     const user = await DB.User.create({
       username: username,
       password: md5(password),
       avatar: config.logo_image || '/images/user/default.png',
       reg: {
         landing: landingData._id
-      },
-      referral: referral
+      }
     })
 
     // Update Landing
@@ -76,19 +74,8 @@ export default defineEventHandler(async (event) => {
     // Save IP
     await DB.LogUserIP.create({ user: user._id, ip: IP })
 
-    // Save Log And Send Notify
+    // Save Log
     logUser(event, user._id, `Đăng ký tài khoản nhanh tại Landing <b>${landingData.code}</b> với IP <b>${IP}</b>`)
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      color: 'primary',
-      content: `Chào mừng thành viên mới, chúc bạn chơi game vui vẻ. Hãy nhớ truy cập trang thông tin và cập nhật <b>Email</b> và <b>Số điện thoại</b> để bảo mật tài khoản của mình nhé`
-    })
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã đăng nhập với IP <b>${IP}</b>`
-    })
     await createChat(event, 'bot', `Chào mừng thành viên mới <b>${user.username}</b>`)
 
     return resp(event, { message: 'Đăng ký thành công' })

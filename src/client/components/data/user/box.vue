@@ -46,11 +46,6 @@
       </UiFlex>
 
       <UiFlex type="col" class="p-2 w-4/12">
-        <UiText size="xs" color="gray" class="mb-1">Cống Hiến</UiText>
-        <UiText weight="bold" @click="useTo().navigateToSSL('/main/action/withdraw'), emit('action')" pointer>{{ miniMoney(user.currency?.diamond) }}</UiText>
-      </UiFlex>
-
-      <UiFlex type="col" class="p-2 w-4/12">
         <UiText size="xs" color="gray" class="mb-1">Lượt Quay</UiText>
         <UiText weight="bold" @click="useTo().navigateToSSL('/main/minigame/wheel'), emit('action')" pointer>{{ miniMoney(user.currency?.wheel) }}</UiText>
       </UiFlex>
@@ -58,21 +53,12 @@
 
     <!--Email Phone-->
     <div 
-      v-if="(user.phone || user.email || user.referral) && !noAuth"
+      v-if="(user.phone || user.email) && !noAuth"
       :class="[
         'py-2 px-4',
         'border-t border-gray-100 dark:border-gray-800',
       ]"
     >
-      <UiFlex justify="between" class="text-gray-500 dark:text-gray-400 py-2" v-if="user.referral">
-        <UiFlex class="mr-6" >
-          <UiIcon name="i-bx-barcode" size="5" class="mr-2" />
-          <UiText weight="semibold" size="sm">Mã mời</UiText>
-        </UiFlex>
-        
-        <UiText size="sm" weight="bold" color="primary" pointer @click="startCopy(user.referral.code)">{{ user.referral.code || '...' }}</UiText>
-      </UiFlex>
-
       <UiFlex justify="between" class="text-gray-500 dark:text-gray-400 py-2">
         <UiFlex class="mr-6" >
           <UiIcon name="i-bx-envelope" size="5" class="mr-2" />

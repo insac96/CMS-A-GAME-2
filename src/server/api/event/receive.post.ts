@@ -1,7 +1,7 @@
 import type { IAuth, IDBEvent, IDBEventConfig, IDBItem } from '~~/types'
 
 const currencyTypeList = [
-  'coin', 'wheel', 'notify'
+  'coin', 'wheel'
 ]
 
 const typeName : any = {
@@ -12,8 +12,7 @@ const typeName : any = {
   'pay.month.money': 'Tích nạp tháng', 
   'spend.total.coin': 'Tiêu phí tổng',
   'spend.day.coin': 'Tiêu phí ngày',
-  'spend.month.coin': 'Tiêu phí tháng',
-  'referral.count': 'Giới thiệu bạn'
+  'spend.month.coin': 'Tiêu phí tháng'
 }
 
 export default defineEventHandler(async (event) => {
@@ -102,9 +101,6 @@ export default defineEventHandler(async (event) => {
     }
     if(!!giftCurrency[`currency.wheel`] && giftCurrency[`currency.wheel`] > 0){
       change.push(`${giftCurrency[`currency.wheel`].toLocaleString('vi-VN')} lượt quay`) 
-    }
-    if(!!giftCurrency[`currency.notify`] && giftCurrency[`currency.notify`] > 0){
-      change.push(`${giftCurrency[`currency.notify`].toLocaleString('vi-VN')} lượt gửi thông báo`) 
     }
 
     logUser(event, auth._id, `Nhận thưởng mốc <b>${eventData.need.toLocaleString('vi-VN')}</b> của sự kiện <b>${typeName[eventData.type]}</b> tại máy chủ <b>${server}</b> nhân vật <b>${role}</b>`)

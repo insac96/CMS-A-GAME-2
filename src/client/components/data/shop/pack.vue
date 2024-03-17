@@ -1,6 +1,6 @@
 <template>
   <UCard
-    v-if="item" 
+    v-if="pack" 
     :ui="{ 
       base: 'relative transition-all cursor-pointer',
       background: 'hover:bg-gray-100 dark:hover:bg-gray-800',
@@ -11,21 +11,18 @@
       ring: 'dark:ring-1 ring-0 hover:ring-2 dark:hover:ring-2 hover:ring-primary-500 dark:hover:ring-primary-400'
     }"
   > 
-    <DataItemImage 
-      :src="item.image || null"
-      :type="item.type"
-      :size="100"
-      class="mb-4 mx-auto" 
-    />
-
     <UiText 
       color="primary"
       weight="bold"
       align="center"
       class="truncate lg:text-base text-sm mb-1 px-2"
     >
-      {{ item.item_amount > 1 ? `x${miniMoney(item.item_amount)}` : '' }} {{ item.name }}
+      {{ pack.name }}
     </UiText>
+
+    <UiFlex justify="center" class="pointer-events-none my-6" >
+      <DataItemListMini justify="center" :items="pack.gift" :max="max" />
+    </UiFlex>
 
     <UiText 
       weight="semibold"
@@ -33,7 +30,7 @@
       align="center"
       class="truncate lg:text-xs text-[10px] mb-4"
     >
-      {{ (!!systemDiscount && systemDiscount.number > 0) ? `Giảm giá ${systemDiscount.number}%` : typeFormat[item.type] }}
+      {{ (!!systemDiscount && systemDiscount.number > 0) ? `Giảm giá ${systemDiscount.number}%` : `${pack.gift.length} vật phẩm` }}
     </UiText>
     
     <UiFlex justify="center">
@@ -46,15 +43,9 @@
 </template>
 
 <script setup>
-const props = defineProps(['item', 'config'])
+const props = defineProps(['pack', 'config', 'max'])
 const { miniMoney } = useMoney()
 const { dayjs, displayFull } = useDayJs()
-
-const typeFormat = {
-  'game_recharge': 'Gói Nạp',
-  'game_item': 'Vật Phẩm',
-  'wheel': 'Tiền Tệ'
-}
 
 const systemDiscount = computed(() => {
   if(!props.config) return null
@@ -76,11 +67,11 @@ const systemDiscount = computed(() => {
 })
 
 const totalPrice = computed(() => {
-  if(!props.item) return 0
-  if(!systemDiscount.value) return props.item.price
+  if(!props.pack) return 0
+  if(!systemDiscount.value) return props.pack.price
 
   const discount_system = systemDiscount.value.number
-  const total = props.item.price - Math.floor(props.item.price * discount_system / 100)
+  const total = props.pack.price - Math.floor(props.pack.price * discount_system / 100)
   return total
 })
 </script>

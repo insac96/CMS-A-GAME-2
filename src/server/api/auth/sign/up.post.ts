@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   try {
     const runtimeConfig = useRuntimeConfig()
 
-    const { username, password, email, phone, referral_code } = await readBody(event)
+    const { username, password, email, phone } = await readBody(event)
 
     if (!username) throw 'Vui lòng nhập tài khoản'
     if (username.length < 6 || username.length > 15) throw 'Tài khoản trong khoảng 6-15 ký tự'
@@ -49,16 +49,6 @@ export default defineEventHandler(async (event) => {
       if(userCheck.email == email) throw 'Địa chỉ Email đã tồn tại'
     }
 
-    // Check Referral Code
-    const referral : any = { code: `${config.contact.prefix || 'GAME'}-${username.toUpperCase()}` }
-    if(!!referral_code){
-      const referraler = await DB.User.findOne({ 'referral.code': referral_code }).select('_id')
-      if(!referraler) throw 'Mã mời không tồn tại'
-      
-      referral.person = referraler._id
-      await DB.User.updateOne({ _id: referraler._id }, { $inc: { 'referral.count': 1 }})
-    }
-
     // Check IP
     const IP = getRequestIP(event, { xForwardedFor: true })
     const logIP = await DB.LogUserIP.count({ ip: IP })
@@ -70,8 +60,7 @@ export default defineEventHandler(async (event) => {
       password: md5(password),
       phone: phone,
       email: email,
-      avatar: config.logo_image || '/images/user/default.png',
-      referral: referral
+      avatar: config.logo_image || '/images/user/default.png'
     })
 
     // Update Ads From
@@ -93,20 +82,9 @@ export default defineEventHandler(async (event) => {
     // Save IP
     await DB.LogUserIP.create({ user: user._id, ip: IP })
 
-    // Send Notify and Save Log
+    // Save Log
     logUser(event, user._id, 'Đăng ký tài khoản ')
     logUser(event, user._id, `Đăng nhập với IP <b>${IP}</b>`)
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      color: 'primary',
-      content: `Chào mừng thành viên mới, chúc bạn chơi game vui vẻ`
-    })
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã đăng nhập với IP <b>${IP}</b>`
-    })
     await createChat(event, 'bot', `Chào mừng thành viên mới <b>${user.username}</b>`)
     
     return resp(event, { message: 'Đăng ký thành công' })

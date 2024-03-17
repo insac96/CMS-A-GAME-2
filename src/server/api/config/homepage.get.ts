@@ -1,4 +1,4 @@
-import { IDBAdsLanding, IDBAdsTeaser, IDBConfig } from "~~/types"
+import { IDBAdsLanding, IDBConfig } from "~~/types"
 
 export default defineEventHandler(async (event) => {
   try {

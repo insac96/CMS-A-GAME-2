@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     
     const userData = await DB.User
     .findOne({ _id: userCheck })
-    .select('login pay spend wheel dice referral')
+    .select('login pay spend wheel')
     if(!userData) throw 'Không tìm thấy thông tin tài khoản'
 
     return resp(event, { result: userData })

@@ -6,7 +6,7 @@ const typeName : any = {
 }
 
 const currencyTypeList = [
-  'coin', 'wheel', 'notify'
+  'coin', 'wheel'
 ]
 
 export default defineEventHandler(async (event) => {
@@ -102,9 +102,6 @@ export default defineEventHandler(async (event) => {
     }
     if(!!giftCurrency[`currency.wheel`] && giftCurrency[`currency.wheel`] > 0){
       change.push(`${giftCurrency[`currency.wheel`].toLocaleString('vi-VN')} lượt quay`) 
-    }
-    if(!!giftCurrency[`currency.notify`] && giftCurrency[`currency.notify`] > 0){
-      change.push(`${giftCurrency[`currency.notify`].toLocaleString('vi-VN')} lượt gửi thông báo`) 
     }
 
     logUser(event, auth._id, `Nhận quà xếp hạng <b>${typeName[rankgift.type]} ${find.rank}</b> tại máy chủ <b>${rankgift.server}</b> nhân vật <b>${role}</b>`)

@@ -1,7 +1,7 @@
 import type { IAuth, IDBGiftcode, IDBItem } from '~~/types'
 
 const currencyTypeList = [
-  'coin', 'wheel', 'notify'
+  'coin', 'wheel'
 ]
 
 export default defineEventHandler(async (event) => {
@@ -82,9 +82,6 @@ export default defineEventHandler(async (event) => {
     }
     if(!!giftCurrency[`currency.wheel`] && giftCurrency[`currency.wheel`] > 0){
       change.push(`${giftCurrency[`currency.wheel`].toLocaleString('vi-VN')} lượt quay`) 
-    }
-    if(!!giftCurrency[`currency.notify`] && giftCurrency[`currency.notify`] > 0){
-      change.push(`${giftCurrency[`currency.notify`].toLocaleString('vi-VN')} lượt gửi thông báo`) 
     }
 
     logUser(event, auth._id, `Sử dụng giftcode <b>${giftcodeData.code}</b> tại máy chủ <b>${server}</b> nhân vật <b>${role}</b>`)

@@ -1,14 +1,14 @@
 <template>
   <UiFlex class="PannelMenu" @click="to">
     <UiFlex type="col" items="start" class="pl-5">
-      <UiText class="PannelMenu__Title mb-1" items="start" size="3xl">Shop</UiText>
-      <UiText size="xs">Cửa Hàng</UiText>
+      <UiText class="PannelMenu__Title mb-1" size="3xl">Wheel</UiText>
+      <UiText size="xs">Vòng Quay May Mắn</UiText>
     </UiFlex>
-    <img class="PannelMenu__Icon" src="/ui/shop.png" />
+    <img class="PannelMenu__Icon" src="/ui/giftcode.png" />
 
-    <UModal v-model="modal" :ui="{width: 'sm:max-w-[850px]'}">
-      <UiDialog title="Cửa Hàng" @close="modal = false">
-        <MainShop />
+    <UModal v-model="modal">
+      <UiDialog title="Vòng Quay May Mắn" @close="modal = false">
+        <MainMinigameWheel />
       </UiDialog>
     </UModal>
   </UiFlex>

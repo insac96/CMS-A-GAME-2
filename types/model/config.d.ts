@@ -15,47 +15,13 @@ export interface IDBConfig {
   about: string
   privacy: string
   terms: string
-  menu: {
-    action: {
-      payment: boolean
-      withdraw: boolean
-      giftcode: boolean
-    }
-    shop: {
-      pack: boolean
-      item: boolean
-      currency: boolean
-    }
-    event: {
-      login: boolean
-      pay: boolean
-      spend: boolean
-      limitedevent: boolean
-    }
-    minigame: {
-      wheel: boolean
-      dice: boolean
-    }
-    rank: {
-      level: boolean
-      power: boolean
-    }
-    social: {
-      facebook: boolean
-      group: boolean
-    }
-  }
   enable: {
     signin: boolean
     signup: boolean
     play: boolean
-    referral: boolean
-    teaser: boolean
     landing: boolean
-    limitedevent: boolean
   }
   homepage: {
-    teaser: Types.ObjectId
     landing: Types.ObjectId
   }
   download: {
@@ -127,10 +93,7 @@ export interface IDBConfigStore {
     signin: boolean
     signup: boolean
     play: boolean
-    referral: boolean
-    teaser: boolean
     landing: boolean
-    limitedevent: boolean
   }
   download: {
     apk: string

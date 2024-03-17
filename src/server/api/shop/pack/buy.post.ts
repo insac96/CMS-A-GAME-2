@@ -1,7 +1,7 @@
 import type { IDBLevel, IDBUser, IDBShopPack, IDBItem, IAuth, IDBShopConfig } from "~~/types"
 
 const currencyTypeList = [
-  'coin', 'wheel', 'notify'
+  'coin', 'wheel'
 ]
 
 export default defineEventHandler(async (event) => {

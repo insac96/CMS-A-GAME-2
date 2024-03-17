@@ -10,44 +10,11 @@ export const useConfigStore = defineStore('config', () => {
     logo_image: '',
     logo_long_image: '',
     makeby: '',
-    menu: {
-      action: {
-        payment: false,
-        withdraw: false,
-        giftcode: false,
-      },
-      shop: {
-        pack: false,
-        item: false,
-        currency: false
-      },
-      event: {
-        login: false,
-        pay: false,
-        spend: false,
-        limitedevent: false
-      },
-      minigame: {
-        wheel: false,
-        dice: false
-      },
-      rank: {
-        level: false,
-        power: false
-      },
-      social: {
-        facebook: false,
-        group: false,
-      }
-    },
     enable: {
       signin: true,
       signup: true,
       play: true,
-      referral: true,
-      teaser: false,
-      landing: false,
-      limitedevent: false
+      landing: false
     },
     download: {
       apk: '',

@@ -20,16 +20,6 @@
           <UButton :label="miniNum ? miniMoney(user.currency?.wheel) : toMoney(user.currency?.wheel)" color="gray" @click="navigateToSSL('/main/minigame/wheel')" />
           <UButton  color="primary" icon="i-bxs-color" @click="navigateToSSL('/main/minigame/wheel')"></UButton>
         </UButtonGroup>
-
-        <UButtonGroup size="sm" orientation="horizontal" class="ml-2" v-if="!noNotify">
-          <UButton :label="miniNum ? miniMoney(user.currency?.notify) : toMoney(user.currency?.notify)" color="gray" />
-          <UButton  color="primary" icon="i-bxs-megaphone"></UButton>
-        </UButtonGroup>
-
-        <UButtonGroup size="sm" orientation="horizontal" class="ml-2" v-if="!noDiamond">
-          <UButton :label="miniNum ? miniMoney(user.currency?.diamond) : toMoney(user.currency?.diamond)" color="gray" @click="navigateToSSL('/main/action/withdraw')" />
-          <UButton  color="primary" icon="i-bxs-diamond" @click="navigateToSSL('/main/action/withdraw')"></UButton>
-        </UButtonGroup>
       </div>
     </UiFlex>
   </div>
@@ -46,7 +36,6 @@ const props = defineProps({
   noCoin: Boolean,
   noWheel: Boolean,
   noNotify: Boolean,
-  noDiamond: Boolean,
   miniNum: Boolean,
   modelValue: Object,
   level: Object,

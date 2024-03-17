@@ -24,14 +24,7 @@ export default defineEventHandler(async (event) => {
 
     user.username = username
     await user.save()
-
-    await sendNotifyUser(event, {
-      to: [ user._id ],
-      type: 3,
-      color: 'blue',
-      content: `Bạn đã thao tác đặt <b>tên định danh</b> tài khoản`
-    })
-
+    
     return resp(event, { message: 'Đặt tên định danh thành công' })
   } 
   catch (e:any) {
