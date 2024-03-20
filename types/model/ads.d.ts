@@ -12,6 +12,7 @@ export interface IDBAdsLanding {
     in: number
     up: number
   }
+  notice: string
 }
 
 export interface IDBAdsFrom {

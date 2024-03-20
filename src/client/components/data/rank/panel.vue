@@ -1,13 +1,13 @@
 <template>
   <UiFlex class="PannelMenu" @click="to">
     <UiFlex type="col" items="start" class="pl-5">
-      <UiText class="PannelMenu__Title mb-1" size="3xl">Wheel</UiText>
-      <UiText size="xs">Vòng Quay</UiText>
+      <UiText class="PannelMenu__Title mb-1" size="3xl">Rank</UiText>
+      <UiText size="xs">Xếp Hạng</UiText>
     </UiFlex>
     <img class="PannelMenu__Icon" src="/ui/wheel.png" />
 
     <UModal v-model="modal">
-      <UiDialog title="Vòng Quay May Mắn" @close="modal = false">
+      <UiDialog title="Xếp Hạng" @close="modal = false">
         <MainMinigameWheel />
       </UiDialog>
     </UModal>

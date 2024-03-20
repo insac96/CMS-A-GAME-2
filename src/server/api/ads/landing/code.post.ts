@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
     const landing = await DB.AdsLanding
     .findOneAndUpdate({ code: code }, { $inc: { view: 1 } }, { new: true })
-    .select('code link')
+    .select('code link notice')
 
     if(!landing) throw 'Landing không tồn tại'
     return resp(event, { result: landing })

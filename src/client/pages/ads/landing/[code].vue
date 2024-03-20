@@ -18,6 +18,18 @@
         <DataGiftcodePublic v-if="tabItem == 2"></DataGiftcodePublic>
       </div>
     </UModal>
+
+    <UModal v-model="notice">
+      <UiFlex type="col" justify="center" class="p-6">
+        <UiText color="primary" weight="bold" align="center" size="xl" class="mb-6">Thông Báo</UiText>
+
+        <div class="mb-6 w-full max-h-[60vh] overflow-y-auto">
+          <UiText color="gray" v-html="landing.notice"></UiText>
+        </div>
+
+        <UButton @click="openSign">{{ !!authStore.isLogin ? 'Chơi Ngay' : 'Đăng Ký' }}</UButton>
+      </UiFlex>
+    </UModal>
   </div>
 </template>
 
@@ -30,6 +42,7 @@ const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
 const authStore = useAuthStore()
 const modal = ref(false)
+const notice = ref(false)
 const landing = ref(undefined)
 
 const tabItem = ref(1) 
@@ -41,6 +54,7 @@ const tabItems = [
 
 const openSign = () => {
   if(!!authStore.isLogin) return start()
+  notice.value = false
   modal.value = true
 }
 
@@ -64,6 +78,7 @@ const getLanding = async () => {
   try {
     const data = await useAPI('ads/landing/code', { code: route.params.code })
     landing.value = data
+    if(!!landing.value.notice) notice.value = true
   }
   catch (e) {
     return false

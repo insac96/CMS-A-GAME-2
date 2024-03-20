@@ -43,6 +43,7 @@ export default defineAppConfig({
     },
 
     modal: {
+      rounded: 'rounded-2xl',
       container: 'items-center',
       overlay: {
         background: 'bg-white/25 dark:bg-black/50 backdrop-blur'

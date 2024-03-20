@@ -76,6 +76,10 @@
           <UInput v-model="stateEdit.link" />
         </UFormGroup>
 
+        <UFormGroup label="Notice">
+          <UiEditor v-model="stateEdit.notice" />
+        </UFormGroup>
+
         <UiFlex justify="end" class="mt-6">
           <UButton type="submit" :loading="loading.edit">Sửa</UButton>
           <UButton color="gray" @click="modal.edit = false" :disabled="loading.edit" class="ml-1">Đóng</UButton>
@@ -149,7 +153,8 @@ const stateAdd = ref({
 const stateEdit = ref({
   _id: null,
   code: null,
-  link: null
+  link: null,
+  notice: null
 })
 
 // Modal

@@ -9,7 +9,8 @@ export const DBAdsLanding = (mongoose : Mongoose) => {
     sign: {
       in: { type: Number, default: 0, index: true },
       up: { type: Number, default: 0, index: true },
-    }
+    },
+    notice: { type: String }
   }, {
     timestamps: true
   })

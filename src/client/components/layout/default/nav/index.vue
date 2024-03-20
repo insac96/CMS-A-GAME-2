@@ -1,5 +1,5 @@
 <template>
-  <UiFlex type="col" class="min-h-full overflow-hidden py-4">
+  <UiFlex type="col" class="min-h-full overflow-x-hidden overflow-y-auto py-4">
     <UiFlex class="w-full mb-6" justify="center">
       <NuxtLink to="/">
         <UiLogo @click="open = false" />
@@ -8,7 +8,7 @@
 
     <DataUserPanel v-if="!!authStore.isLogin" class="mb-4" />
 
-    <div class="grow w-full py-4 overflow-x-hidden overflow-y-auto py-4">
+    <div class="grow w-full py-4">
       <DataPaymentPanel class="w-full" />
       <DataShopPanel class="w-full" />
       <DataEventPanel class="w-full" />
@@ -17,7 +17,7 @@
     </div>
 
     <div class="w-full px-3">
-      <UiFlex justify="center" class="gap-0.5 mb-4">
+      <UiFlex justify="center" class="gap-0.5 mb-4 mt-4">
         <UiImg 
           class="max-w-[45px] max-h-[45px] cursor-pointer rounded-full"
           src="/images/social/facebook.png"

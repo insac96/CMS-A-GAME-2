@@ -18,7 +18,7 @@
       </UFormGroup>
 
       <UiFlex justify="end" class="mt-6">
-        <UButton type="submit" :loading="loading">Đăng Ký Nhanh</UButton>
+        <UButton type="submit" :loading="loading">Xác Nhận</UButton>
       </UiFlex>
     </UForm>
 
