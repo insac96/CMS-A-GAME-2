@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     const { gate, card, money } = body
     if(!gate || !card) throw 'Dữ liệu đầu vào không hợp lệ'
     if(!!isNaN(parseInt(money)) || parseInt(money) < 1) throw 'Số tiền không hợp lệ'
-    if(parseInt(money) < 20000) throw 'Số tiền phải lớn hơn hoặc bằng 20.000đ'
+    if(parseInt(money) < 10000) throw 'Số tiền phải lớn hơn hoặc bằng 20.000đ'
     if(parseInt(money) % 10000 != 0) return 'Số tiền phải là bội số của 10.000'
     if(parseInt(money) > 50000000) throw 'Số tiền nhập vào quá lớn'
 

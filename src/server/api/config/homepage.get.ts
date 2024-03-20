@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
     if(!!config.enable.landing && !!config.homepage.landing){
       const landing = await DB.AdsLanding.findOne({ _id: config.homepage.landing }) as IDBAdsLanding
-      if(!!landing) return resp(event, { result: landing.link })
+      if(!!landing) return resp(event, { result: landing })
     }
 
     return resp(event, { result: '/' })

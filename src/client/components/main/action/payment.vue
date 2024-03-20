@@ -180,7 +180,7 @@ const gateBonus = computed(() => {
 const totalCoin = computed(() => {
   if(!gateBonus.value) return null
   if(!state.value.money) return null
-  if(state.value.money < 20000) return null
+  if(state.value.money < 10000) return null
 
   const coin = state.value.money
   const coinBonus = Math.floor((parseInt(state.value.money) * parseInt(gateBonus.value.number)) / 100)
@@ -191,12 +191,12 @@ const totalCoin = computed(() => {
 // Card
 const card = {
   net:  [
-    { label: 'Viettel', value: 'VTT' },
-    { label: 'Mobifone', value: 'VMS' },
-    { label: 'Vinaphone', value: 'VNP' },
+    { label: 'Viettel', value: 'VIETTEL' },
+    { label: 'Mobifone', value: 'MOBIFONE' },
+    { label: 'Vinaphone', value: 'VINAPHONE' },
   ],
   money: [
-    // { label: '10.000', value: 10000 },
+    { label: '10.000', value: 10000 },
     { label: '20.000', value: 20000 },
     { label: '30.000', value: 30000 },
     { label: '50.000', value: 50000 },
