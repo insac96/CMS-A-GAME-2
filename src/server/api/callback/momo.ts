@@ -1,24 +1,30 @@
-import md5 from "md5"
 import type { IDBGate, IDBPayment } from "~~/types"
-import type { MultiPartData } from "h3"
 
-const parseMutipart = (data?: MultiPartData) => {
-  const arr = Array.isArray(data) ? data : []
-  const result = arr.reduce((prev: Record<string,any>, curr) => {
-    prev[String(curr.name)] = curr.data.toString('utf8')
-    return prev
-  }, [])
-  
-  return result
-}
 export default defineEventHandler(async (event) => {
   try {
-    const formData : any = await readMultipartFormData(event)
-    const body : any = parseMutipart(formData)
-    const { fullID, partnerID, partnerNum, time, sign, amount } = body
-    if(!fullID || !partnerID || !partnerNum || !time || !sign || !amount) throw 'Không có quyền quy cập'
+    const query = getQuery(event)
+    const { money, code, key } = query
+    if(!money || !code || !key) throw 'Không có quyền quy cập'
 
-    
+    // Get Payment
+    const realCode = (code as string).trim().replace(/\s/g, '').toUpperCase()
+    const payment = await DB.Payment.findOne({ code: realCode }).select('_id gate') as IDBPayment
+    if(!payment) throw 'Giao dịch không tồn tại'
+
+    // Get Gate
+    const gate = await DB.Gate.findOne({ _id: payment.gate }).select('key') as IDBGate
+    if(!gate) throw 'Kênh nạp không tồn tại'
+    if(!gate.key) throw 'Kênh chưa hỗ trợ tự động duyệt'
+    if(gate.key != key) throw 'Chữ ký không hợp lệ'
+
+    await verifyPayment(event, {
+      _id: payment._id,
+      status: 1,
+      money: Number(money),
+      reason: 'Không thể xác thực giao dịch'
+    })
+
+    resp(event, { message: 'Xử lý thành công' })
   } 
   catch (e:any) {
     setResponseStatus(event, 500)

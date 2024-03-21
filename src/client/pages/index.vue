@@ -44,6 +44,8 @@ const start = async () => {
       if(landing.value) return notice.value = true
     }
 
+    
+
     // Game Start
     await useAPI('game/start')
     if(!!runtimeConfig.public.dev) navigateTo('/play')

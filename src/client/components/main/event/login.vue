@@ -64,7 +64,7 @@ const config = ref({
   display: 0
 })
 const list = ref([])
-const type = ref('login.month')
+const type = ref('login.total')
 const tabItem = ref(0) 
 const tabItems = [
   { label: 'Ngày', key: 'login.total' },
