@@ -67,8 +67,8 @@ const list = ref([])
 const type = ref('login.month')
 const tabItem = ref(0) 
 const tabItems = [
+  { label: 'Ngày', key: 'login.total' },
   { label: 'Tháng', key: 'login.month' },
-  { label: 'Năm', key: 'login.total' },
 ]
 watch(() => tabItem.value, (value) => {
   type.value = tabItems[value]['key']
