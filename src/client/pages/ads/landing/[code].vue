@@ -27,7 +27,7 @@
           <UiText color="gray" v-html="landing.notice"></UiText>
         </div>
 
-        <UButton @click="openSign">{{ !!authStore.isLogin ? 'Chơi Ngay' : 'Đăng Ký' }}</UButton>
+        <UButton @click="start">Chơi Ngay</UButton>
       </UiFlex>
     </UModal>
   </div>
@@ -41,7 +41,7 @@ definePageMeta({
 const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
 const authStore = useAuthStore()
-const modal = ref(false)
+const modal = ref(true)
 const notice = ref(false)
 const landing = ref(undefined)
 
@@ -59,7 +59,7 @@ const openSign = () => {
 }
 
 const thankyou = async () => {
-  useTo().navigateToSSL('/thankyou')
+  if(!!landing.value.notice) return notice.value = true
 }
 
 const start = async () => {
@@ -78,7 +78,6 @@ const getLanding = async () => {
   try {
     const data = await useAPI('ads/landing/code', { code: route.params.code })
     landing.value = data
-    if(!!landing.value.notice) notice.value = true
   }
   catch (e) {
     return false
