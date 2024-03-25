@@ -10,7 +10,9 @@ export const DBAdsLanding = (mongoose : Mongoose) => {
       in: { type: Number, default: 0, index: true },
       up: { type: Number, default: 0, index: true },
     },
-    notice: { type: String }
+    notice: { type: String },
+    facebook_ads: { type: String },
+    google_ads: { type: String },
   }, {
     timestamps: true
   })

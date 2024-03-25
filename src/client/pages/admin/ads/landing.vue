@@ -76,6 +76,14 @@
           <UInput v-model="stateEdit.link" />
         </UFormGroup>
 
+        <UFormGroup label="Facebook Ads">
+          <UInput v-model="stateEdit.facebook_ads" />
+        </UFormGroup>
+
+        <UFormGroup label="Google Ads">
+          <UInput v-model="stateEdit.google_ads" />
+        </UFormGroup>
+
         <UFormGroup label="Notice">
           <UiEditor v-model="stateEdit.notice" />
         </UFormGroup>
@@ -154,7 +162,9 @@ const stateEdit = ref({
   _id: null,
   code: null,
   link: null,
-  notice: null
+  notice: null,
+  facebook_ads: null,
+  google_ads: null
 })
 
 // Modal

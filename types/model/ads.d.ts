@@ -13,6 +13,8 @@ export interface IDBAdsLanding {
     up: number
   }
   notice: string
+  facebook_ads: string
+  google_ads: string
 }
 
 export interface IDBAdsFrom {
