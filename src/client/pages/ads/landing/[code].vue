@@ -49,7 +49,7 @@ useHead({
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '${landing ? landing.facebook_ads : null}');
+      fbq('init', '${landing.value ? landing.value.facebook_ads : null}');
       fbq('track', 'PageView');
     `},
     { children: `
@@ -57,7 +57,7 @@ useHead({
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer', '${landing ? landing.google_ads : null}');
+      })(window,document,'script','dataLayer', '${landing.value ? landing.value.google_ads : null}');
     `}
   ],
 })
