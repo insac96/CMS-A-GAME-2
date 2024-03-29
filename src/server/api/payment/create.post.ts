@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
     const countPayment = await DB.Payment.count()
     const prefix = config.short_name ? config.short_name.trim().toUpperCase() : 'PAY'
     const code = prefix + (countPayment > 9 ? countPayment : `0${countPayment}`) + Math.floor(Math.random() * (99 - 10) + 10)
-    const token = md5(`${code}-${Date.now()}`)
+    const token = prefix + '-' + md5(`${code}-${Date.now()}`)
     
     // Make QR
     let qrcode
