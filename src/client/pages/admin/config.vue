@@ -42,6 +42,15 @@
             <SelectAdsLanding v-model="state.homepage.landing" v-if="!!state.enable.landing" />
           </div>
 
+          <div class="mb-4">
+            <UiFlex justify="between" class="mb-4">
+              <UiText weight="semibold">Thông báo</UiText>
+              <UToggle v-model="state.enable.notice" />
+            </UiFlex>
+
+            <UiEditor v-model="state.enable.notice_content" v-if="!!state.enable.notice"></UiEditor>
+          </div>
+
           <UiFlex justify="end" class="mt-4">
             <UButton @click="update('cfg')" :loading="updating">Cập nhật</UButton>
           </UiFlex>
@@ -298,7 +307,9 @@ const state = ref({
     signin: true,
     signup: true,
     play: true,
-    landing: false
+    landing: false,
+    notice: false,
+    notice_content: null
   },
 
   homepage: {

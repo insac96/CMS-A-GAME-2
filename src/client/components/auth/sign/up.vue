@@ -26,13 +26,28 @@
         <UButton color="gray" type="submit" :loading="loading.signup">Đăng Ký</UButton>
       </UiFlex>
     </UForm>
+
+    <UModal v-model="modal" prevent-close>
+      <UiFlex type="col" justify="center" class="p-6">
+        <UiText color="primary" weight="bold" align="center" size="xl" class="mb-6">Thông Báo</UiText>
+
+        <div class="mb-6 w-full max-h-[60vh] overflow-y-auto">
+          <UiText color="gray" v-html="configStore.config.enable.notice_content"></UiText>
+        </div>
+
+        <UButton @click="useTo().navigateToSSL('/thankyou')">Xác Nhận</UButton>
+      </UiFlex>
+    </UModal>
   </div>
 </template>
 
 <script setup>
 const { $socket } = useNuxtApp()
+const configStore = useConfigStore()
 const authStore = useAuthStore()
 const emit = defineEmits(['done', 'in'])
+
+const modal = ref(false)
 
 const loading = ref({
   signup: false,
@@ -105,7 +120,9 @@ const start = async () => {
     $socket.emit('login', authStore.profile._id)
 
     loading.value.start = false
-    useTo().navigateToSSL('/thankyou')
+
+    if(!configStore.config.enable.notice) return useTo().navigateToSSL('/thankyou')
+    else return modal.value = true
   }
   catch(e){
     loading.value.start = false

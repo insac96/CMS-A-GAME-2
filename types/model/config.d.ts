@@ -20,6 +20,8 @@ export interface IDBConfig {
     signup: boolean
     play: boolean
     landing: boolean
+    notice: boolean
+    notice_content: string
   }
   homepage: {
     landing: Types.ObjectId
@@ -94,6 +96,8 @@ export interface IDBConfigStore {
     signup: boolean
     play: boolean
     landing: boolean
+    notice: boolean
+    notice_content: string
   }
   download: {
     apk: string

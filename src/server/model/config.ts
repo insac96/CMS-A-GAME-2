@@ -17,7 +17,9 @@ export const DBConfig = (mongoose : Mongoose) => {
       signin: { type: Boolean, default: true },
       signup: { type: Boolean, default: true },
       play: { type: Boolean, default: true },
-      landing: { type: Boolean, default: false }
+      landing: { type: Boolean, default: false },
+      notice: { type: Boolean, default: false },
+      notice_content: { type: String },
     },
     homepage: {
       landing: { type: mongoose.Schema.Types.ObjectId, ref: 'ads_landing' },

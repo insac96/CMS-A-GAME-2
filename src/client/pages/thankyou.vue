@@ -1,6 +1,6 @@
 <template>
   <UiFlex type="col" justify="center" class="h-full" @click="start" v-if="authStore.isLogin">
-    <UiIcon name="i-bxs-wink-smile" class="mb-4" size="24" color="primary" />
+    <UiIcon name="i-bxs-wink-smile" class="mb-4 w-24 h-24" color="primary" />
     <UiText color="primary" weight="bold" size="4xl" class="mb-4 px-2">Xin chào, {{ authStore.profile.username }}</UiText>
     <UiText class="mb-4 px-6" align="center">Chào mừng đến với {{ configStore.config.name }}, chúc bạn có những phút giây vui vẻ</UiText>
     <UiIcon color="primary" name="i-bx-loader-alt" class="animate-spin mb-1" size="5" />

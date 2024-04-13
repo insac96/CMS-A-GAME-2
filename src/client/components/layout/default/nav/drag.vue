@@ -1,18 +1,47 @@
 <template>
   <div class="xl:hidden">
-    <div id="ButtonDrag" class="bg-gray-900 backdrop-blur-xl shadow-xl rounded-full touch-none overflow-hidden" :style="style" ref="el" @click="openMenu">
-      <UiImg v-if="!!configStore.config.logo_image" :src="configStore.config.logo_image" w="1" h="1" img-w="100" img-h="100" class="w-full h-full" />
-      
-      <UiIcon v-else name="i-bx-menu" color="primary" size="8" />
+    <div id="ButtonDrag" class="bg-gray-900 backdrop-blur-xl shadow-xl rounded-full touch-none ring-2 ring-primary" :style="style" ref="el">
+      <UDropdown :items="menu" :popper="{ 
+        placement: 'auto-end',
+        strategy: 'absolute',
+        scroll: 'true'
+      }">
+        <UiImg v-if="!!configStore.config.logo_image" :src="configStore.config.logo_image" w="1" h="1" img-w="100" img-h="100" class="w-full h-full overflow-hidden rounded-full" />
+        <UiIcon v-else name="i-bx-menu" color="primary" size="8" />
+      </UDropdown>
     </div>
 
     <div class="fixed bg-black/50 w-full h-full top-0 left-0" style="z-index: 2;" v-if="!!dragging"></div>
 
-    <USlideover v-model="open" side="left" :ui="{
-      width: 'w-screen max-w-[250px]'
-    }">
-      <LayoutDefaultNav @to="open = false"/>
-    </USlideover>
+    <UModal v-model="modal.payment">
+      <UiDialog title="Nạp Xu" @close="modal.payment = false">
+        <MainActionPayment />
+      </UiDialog>
+    </UModal>
+
+    <UModal v-model="modal.giftcode">
+      <UiDialog title="Giftcode" @close="modal.giftcode = false">
+        <MainActionGiftcode />
+      </UiDialog>
+    </UModal>
+
+    <UModal v-model="modal.shop" :ui="{width: 'sm:max-w-[850px]'}">
+      <UiDialog title="Cửa hàng" @close="modal.shop = false">
+        <MainShop />
+      </UiDialog>
+    </UModal>
+
+    <UModal v-model="modal.event" :ui="{width: 'sm:max-w-[850px]'}">
+      <UiDialog title="Sự kiện" @close="modal.event = false">
+        <MainEvent />
+      </UiDialog>
+    </UModal>
+
+    <UModal v-model="modal.wheel">
+      <UiDialog title="Vòng quay" @close="modal.wheel = false">
+        <MainMinigameWheel />
+      </UiDialog>
+    </UModal>
   </div>
 </template>
 
@@ -26,7 +55,53 @@ const el = ref(null)
 
 const dragging = ref(false)
 
-const open = ref(false)
+const modal = ref({
+  payment: false,
+  giftcode: false,
+  shop: false,
+  event: false,
+  wheel: false
+})
+
+const menu = ref([
+  [{
+    label: 'Trang chủ',
+    icon: 'i-bx-home',
+    click: () => useTo().navigateToSSL('/')
+  }],
+  [{
+    label: 'Nạp xu',
+    icon: 'i-bx-credit-card',
+    click: () => modal.value.payment = true
+  },{
+    label: 'Giftcode',
+    icon: 'i-bx-barcode-reader',
+    click: () => modal.value.giftcode = true
+  }],
+  [{
+    label: 'Cửa hàng',
+    icon: 'i-bx-shopping-bag',
+    click: () => modal.value.shop = true
+  },{
+    label: 'Sự kiện',
+    icon: 'i-bx-calendar',
+    click: () => modal.value.event = true
+  }],
+  [{
+    label: 'Vòng quay',
+    icon: 'i-bxs-color',
+    click: () => modal.value.wheel = true
+  }],
+  [{
+    label: 'Fanpage',
+    icon: 'i-bxl-facebook',
+    click: () => window.open(configStore.config.social.facebook, '_blank')
+  },{
+    label: 'Zalo',
+    icon: 'i-bxs-group',
+    click: () => window.open(configStore.config.social.zalo, '_blank')
+  }]
+])
 
 const { style } = useDraggable(el, {
   initialValue: { x: -8, y: -8 },
@@ -39,11 +114,6 @@ const { style } = useDraggable(el, {
     dragging.value = false
   }
 })
-
-const openMenu = () => {
-  if(!!dragging.value) return
-  open.value = true
-}
 </script>
 
 <style lang="sass">
