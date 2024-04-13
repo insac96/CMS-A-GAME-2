@@ -48,7 +48,9 @@
 <script setup>
 import { useDraggable } from '@vueuse/core'
 
+const runtimeConfig = useRuntimeConfig()
 const configStore = useConfigStore()
+const authStore = useAuthStore()
 const emits = defineEmits(['open'])
 
 const el = ref(null)
@@ -63,45 +65,63 @@ const modal = ref({
   wheel: false
 })
 
-const menu = ref([
-  [{
-    label: 'Trang chủ',
-    icon: 'i-bx-home',
-    click: () => useTo().navigateToSSL('/')
-  }],
-  [{
-    label: 'Nạp xu',
-    icon: 'i-bx-credit-card',
-    click: () => modal.value.payment = true
-  },{
-    label: 'Giftcode',
-    icon: 'i-bx-barcode-reader',
-    click: () => modal.value.giftcode = true
-  }],
-  [{
-    label: 'Cửa hàng',
-    icon: 'i-bx-shopping-bag',
-    click: () => modal.value.shop = true
-  },{
-    label: 'Sự kiện',
-    icon: 'i-bx-calendar',
-    click: () => modal.value.event = true
-  }],
-  [{
-    label: 'Vòng quay',
-    icon: 'i-bxs-color',
-    click: () => modal.value.wheel = true
-  }],
-  [{
-    label: 'Fanpage',
-    icon: 'i-bxl-facebook',
-    click: () => window.open(configStore.config.social.facebook, '_blank')
-  },{
-    label: 'Zalo',
-    icon: 'i-bxs-group',
-    click: () => window.open(configStore.config.social.zalo, '_blank')
-  }]
-])
+const menu = computed(() => {
+  const list = [
+    [{
+      label: 'Trang chủ',
+      icon: 'i-bx-home',
+      click: () => useTo().navigateToSSL('/')
+    }],
+    [{
+      label: 'Nạp xu',
+      icon: 'i-bx-credit-card',
+      click: () => modal.value.payment = true
+    },{
+      label: 'Giftcode',
+      icon: 'i-bx-barcode-reader',
+      click: () => modal.value.giftcode = true
+    }],
+    [{
+      label: 'Cửa hàng',
+      icon: 'i-bx-shopping-bag',
+      click: () => modal.value.shop = true
+    },{
+      label: 'Sự kiện',
+      icon: 'i-bx-calendar',
+      click: () => modal.value.event = true
+    }],
+    [{
+      label: 'Vòng quay',
+      icon: 'i-bxs-color',
+      click: () => modal.value.wheel = true
+    }],
+    [{
+      label: 'Fanpage',
+      icon: 'i-bxl-facebook',
+      click: () => window.open(configStore.config.social.facebook, '_blank')
+    },{
+      label: 'Zalo',
+      icon: 'i-bxs-group',
+      click: () => window.open(configStore.config.social.zalo, '_blank')
+    }]
+  ]
+
+  if(authStore.isLogin){
+    if(authStore.profile.type > 0) list.push([{
+      label: 'Quản trị viên',
+      icon: 'i-bx-server',
+      click: () => goToAdmin()
+    }])
+
+    list.push([{
+      label: 'Đăng xuất',
+      icon: 'i-bx-log-out',
+      click: () => logout()
+    }])
+  }
+
+  return list;
+})
 
 const { style } = useDraggable(el, {
   initialValue: { x: -8, y: -8 },
@@ -114,6 +134,16 @@ const { style } = useDraggable(el, {
     dragging.value = false
   }
 })
+
+const logout = async () => {
+  await useAPI('auth/sign/out')
+  authStore.removeAuth()
+  window.location.href = `${runtimeConfig.public.clientURL}`
+}
+
+const goToAdmin = () => {
+  window.location.href = `${runtimeConfig.public.clientURL}/admin`
+}
 </script>
 
 <style lang="sass">
