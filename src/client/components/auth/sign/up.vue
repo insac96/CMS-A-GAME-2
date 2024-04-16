@@ -35,7 +35,7 @@
           <UiText color="gray" v-html="configStore.config.enable.notice_content"></UiText>
         </div>
 
-        <UButton @click="useTo().navigateToSSL('/thankyou')">Xác Nhận</UButton>
+        <UButton @click="modal = false; emit('done'); play()">Xác Nhận</UButton>
       </UiFlex>
     </UModal>
   </div>
@@ -43,6 +43,7 @@
 
 <script setup>
 const { $socket } = useNuxtApp()
+const runtimeConfig = useRuntimeConfig()
 const configStore = useConfigStore()
 const authStore = useAuthStore()
 const emit = defineEmits(['done', 'in'])
@@ -121,11 +122,23 @@ const start = async () => {
 
     loading.value.start = false
 
-    if(!configStore.config.enable.notice) return useTo().navigateToSSL('/thankyou')
+    if(!configStore.config.enable.notice) return play()
     else return modal.value = true
   }
   catch(e){
     loading.value.start = false
+  }
+}
+
+const play = async () => {
+  try {
+    await useAPI('game/start')
+
+    if(!!runtimeConfig.public.dev) navigateTo('/play')
+    else location.href = `http://game.${runtimeConfig.public.domain}/play`
+  }
+  catch (e) {
+    useTo().navigateToSSL('/')
   }
 }
 </script>
