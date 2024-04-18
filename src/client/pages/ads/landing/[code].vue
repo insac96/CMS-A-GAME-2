@@ -60,6 +60,7 @@ const openSign = () => {
 
 const thankyou = async () => {
   if(!!landing.value.notice) return notice.value = true
+  start()
 }
 
 const start = async () => {
