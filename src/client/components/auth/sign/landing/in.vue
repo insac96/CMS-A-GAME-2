@@ -24,7 +24,7 @@
           <UiText color="gray" v-html="configStore.config.enable.notice_content"></UiText>
         </div>
 
-        <UButton @click="modal = false; emit('done')">Xác Nhận</UButton>
+        <UButton @click="modal = false; emit('done')">Chơi Ngay</UButton>
       </UiFlex>
     </UModal>
   </UCard>
