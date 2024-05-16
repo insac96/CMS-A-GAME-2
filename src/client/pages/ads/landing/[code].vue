@@ -13,8 +13,8 @@
     <UModal v-model="modal">
       <div class="p-2">
         <UTabs v-model="tabItem" :items="tabItems"></UTabs>
-        <AuthSignLandingIn @done="thankyou" :landing="landing._id" v-if="tabItem == 0" />
-        <AuthSignLandingUp @done="thankyou" :landing="landing._id" v-if="tabItem == 1" />
+        <AuthSignLandingIn @done="thankyou" :landing="landing._id" :notice_system="landing.notice_system" v-if="tabItem == 0" />
+        <AuthSignLandingUp @done="thankyou" :landing="landing._id" :notice_system="landing.notice_system" v-if="tabItem == 1" />
         <DataGiftcodePublic v-if="tabItem == 2"></DataGiftcodePublic>
       </div>
     </UModal>

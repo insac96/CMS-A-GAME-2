@@ -43,7 +43,7 @@ const { $socket } = useNuxtApp()
 const configStore = useConfigStore()
 const authStore = useAuthStore()
 
-const props = defineProps(['landing'])
+const props = defineProps(['landing','notice_system'])
 const emit = defineEmits(['done'])
 
 const modal = ref(false)
@@ -89,8 +89,14 @@ const submit = async () => {
     $socket.emit('login', authStore.profile._id)
 
     loading.value = false
-    if(!configStore.config.enable.notice) return emit('done')
-    else return modal.value = true
+
+    if(!!props.notice_system){
+      if(!configStore.config.enable.notice) return emit('done')
+      else return modal.value = true
+    }
+    else {
+      return emit('done')
+    }
   }
   catch (e) {
     loading.value = false

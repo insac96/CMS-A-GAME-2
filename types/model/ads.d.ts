@@ -15,6 +15,7 @@ export interface IDBAdsLanding {
   notice: string
   facebook_ads: string
   google_ads: string
+  notice_system: boolean
 }
 
 export interface IDBAdsFrom {

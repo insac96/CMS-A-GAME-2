@@ -88,7 +88,9 @@
           <UiEditor v-model="stateEdit.notice" />
         </UFormGroup>
 
-        <UiFlex justify="end" class="mt-6">
+        <UiFlex class="mt-6">
+          <UToggle v-model="stateEdit.notice_system" class="mr-auto" />
+
           <UButton type="submit" :loading="loading.edit">Sửa</UButton>
           <UButton color="gray" @click="modal.edit = false" :disabled="loading.edit" class="ml-1">Đóng</UButton>
         </UiFlex>
@@ -164,7 +166,8 @@ const stateEdit = ref({
   link: null,
   notice: null,
   facebook_ads: null,
-  google_ads: null
+  google_ads: null,
+  notice_system: null
 })
 
 // Modal

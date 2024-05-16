@@ -13,6 +13,7 @@ export const DBAdsLanding = (mongoose : Mongoose) => {
     notice: { type: String },
     facebook_ads: { type: String },
     google_ads: { type: String },
+    notice_system: { type: Boolean, default: true },
   }, {
     timestamps: true
   })
